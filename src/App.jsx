@@ -26,13 +26,21 @@ class App extends Component {
     });
   };
 
+  // Clear users from state
+  clearUsers = () => this.setState({ users: [], loading: false });
+
   render() {
+    const { users, loading } = this.state;
     return (
       <div className='App'>
         <Navbar title='Github Finder' icon='fab fa-github' />
         <div className='container'>
-          <Search searchUser={this.searchUser} />
-          <Users loading={this.state.loading} users={this.state.users} />
+          <Search
+            searchUser={this.searchUser}
+            clearUsers={this.clearUsers}
+            showClear={users.length > 0 ? true : false}
+          />
+          <Users loading={loading} users={users} />
         </div>
       </div>
     );
